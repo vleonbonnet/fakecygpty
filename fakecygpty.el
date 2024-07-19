@@ -146,8 +146,8 @@ TTY's foreground process group pgid equals PROCESS pid."
 		"sh" nil (current-buffer) nil
 		"-c"
 		(format (if as-winpid
-			    "cat `dirname \\`grep -l %s /proc/*/ppid 2>/dev/null\\``/winpid"
-			  "basename `dirname \\`grep -l %s /proc/*/ppid 2>/dev/null\\``")
+			    "cat $(dirname $(grep -l $(basename $(dirname $(grep -l %s /proc/*/winpid))) /proc/*/ppid))/winpid"
+			  "basename $(dirname $(grep -l $(basename $(dirname $(grep -l %s /proc/*/winpid))) /proc/*/ppid))")
 			(process-id process))))
 	  (ignore-errors
 	    (save-match-data
